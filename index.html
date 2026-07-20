@@ -944,11 +944,11 @@
                     </div>
                     <div class="contact-item">
                         <div class="icon">📕</div>
-                        <div class="text"><a href="#" onclick="window.location.href='xhs://user/profile/5ea226f100000000010042d9'; setTimeout(function(){ window.location.href='https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9'; },1500); return false;">小红书：阿昕</a></div>
+                        <div class="text"><a href="#" onclick="openXHS(); return false;">小红书：阿昕</a></div>
                     </div>
 
                     <div class="social-links">
-                        <a href="#" title="小红书" onclick="window.location.href='xhs://user/profile/5ea226f100000000010042d9'; setTimeout(function(){ window.location.href='https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9'; },1500); return false;" style="font-size:1.5rem;">📕</a>
+                        <a href="#" title="小红书" onclick="openXHS(); return false;" style="font-size:1.5rem;">📕</a>
                         <a href="#" title="微信" onclick="alert('微信号: gfyfyfwfff\n\n请复制后在微信搜索添加好友'); return false;" style="font-size:1.5rem;">💬</a>
                         <a href="#" title="GitHub" target="_blank">🐙</a>
                         <a href="#" title="微博" target="_blank">📱</a>
@@ -966,6 +966,35 @@
             </div>
         </div>
     </section>
+
+    <!-- ===== 小红书弹窗 ===== -->
+    <div id="xhsModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;" onclick="closeXHSModal()">
+        <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:20px;padding:36px 32px;max-width:340px;width:90%;text-align:center;" onclick="event.stopPropagation()">
+            <div style="font-size:3rem;margin-bottom:12px;">📕</div>
+            <h3 style="font-size:1.2rem;margin-bottom:8px;">打开小红书</h3>
+            <p style="color:#a0a0b8;font-size:0.95rem;margin-bottom:24px;">是否允许打开小红书 APP 查看？</p>
+            <div style="display:flex;gap:12px;">
+                <button onclick="closeXHSModal()" style="flex:1;padding:12px;border-radius:12px;border:1px solid #2a2a4a;background:transparent;color:#a0a0b8;font-size:1rem;cursor:pointer;">取消</button>
+                <button onclick="openXHSApp()" style="flex:1;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#ff2442,#ff6b81);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">允许</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openXHS() {
+            document.getElementById('xhsModal').style.display = 'flex';
+        }
+        function closeXHSModal() {
+            document.getElementById('xhsModal').style.display = 'none';
+        }
+        function openXHSApp() {
+            closeXHSModal();
+            window.location.href = 'xhs://user/profile/5ea226f100000000010042d9';
+            setTimeout(function() {
+                window.location.href = 'https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9';
+            }, 1500);
+        }
+    </script>
 
     <!-- ===== Footer ===== -->
     <footer>
