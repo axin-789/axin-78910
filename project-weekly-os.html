@@ -230,7 +230,7 @@
             <div class="price-tag">💰 售价：¥29.9</div>
             <div class="cta-group">
                 <a href="#" class="btn btn-red" onclick="openXHS(); return false;">📕 关注小红书</a>
-                <a href="#" class="btn btn-green" onclick="alert('微信号: gfyfyfwfff\n\n请复制微信号在微信中搜索添加'); return false;">💬 添加微信</a>
+                <a href="#" class="btn btn-green" onclick="openWeChat(); return false;">💬 添加微信</a>
             </div>
         </div>
 
@@ -346,7 +346,7 @@
             <p>点击下方按钮，联系我获取购买方式和更多详情</p>
             <div class="cta-group">
                 <a href="#" class="btn btn-red" onclick="openXHS(); return false;">📕 小红书</a>
-                <a href="#" class="btn btn-green" onclick="alert('微信号: gfyfyfwfff\n\n请复制微信号在微信中搜索添加'); return false;">💬 添加微信</a>
+                <a href="#" class="btn btn-green" onclick="openWeChat(); return false;">💬 添加微信</a>
             </div>
         </div>
 
@@ -364,6 +364,18 @@
         </div>
     </div>
 
+    <!-- 微信弹窗 -->
+    <div id="wechatModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;" onclick="closeWeChatModal()">
+        <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:20px;padding:36px 32px;max-width:340px;width:90%;text-align:center;" onclick="event.stopPropagation()">
+            <div style="font-size:3rem;margin-bottom:12px;">💬</div>
+            <h3 style="font-size:1.2rem;margin-bottom:8px;">添加微信</h3>
+            <p style="color:#a0a0b8;font-size:0.95rem;margin-bottom:8px;">请复制微信号，在微信中搜索添加</p>
+            <div id="wechatLink" style="background:#0f0f1a;border:1px solid #2a2a4a;border-radius:12px;padding:14px;font-size:1.3rem;color:#eaeaea;font-weight:700;letter-spacing:2px;margin-bottom:20px;text-align:center;user-select:all;">gfyfyfwfff</div>
+            <button onclick="copyWeChat()" id="wechatCopyBtn" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#07c160,#39d67e);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">复制微信号</button>
+            <button onclick="closeWeChatModal()" style="width:100%;padding:10px;border-radius:12px;border:none;background:transparent;color:#a0a0b8;font-size:0.9rem;cursor:pointer;margin-top:8px;">关闭</button>
+        </div>
+    </div>
+
     <script>
         function openXHS() {
             document.getElementById('xhsModal').style.display = 'flex';
@@ -376,7 +388,23 @@
             navigator.clipboard.writeText(text).then(function() {
                 var btn = document.getElementById('xhsCopyBtn');
                 btn.textContent = '✅ 已复制！';
-                setTimeout(function() { btn.textContent = '复制链接'; }, 2000);
+                setTimeout(function() { btn.textContent = '复制小红书号'; }, 2000);
+            }).catch(function() {
+                alert('复制失败，请手动选择复制');
+            });
+        }
+        function openWeChat() {
+            document.getElementById('wechatModal').style.display = 'flex';
+        }
+        function closeWeChatModal() {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
+        function copyWeChat() {
+            var text = document.getElementById('wechatLink').textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                var btn = document.getElementById('wechatCopyBtn');
+                btn.textContent = '✅ 已复制！';
+                setTimeout(function() { btn.textContent = '复制微信号'; }, 2000);
             }).catch(function() {
                 alert('复制失败，请手动选择复制');
             });
