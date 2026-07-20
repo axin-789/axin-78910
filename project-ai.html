@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 助手 · 阿昕的作品</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6c63ff;
+            --secondary: #f50057;
+            --bg: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --text: #eaeaea;
+            --text-muted: #a0a0b8;
+            --border: #2a2a4a;
+            --radius: 16px;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .back-bar { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .back-btn:hover { color: var(--primary); }
+        .project-header { text-align: center; margin-bottom: 48px; }
+        .project-header .icon { font-size: 4rem; margin-bottom: 16px; }
+        .project-header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; }
+        .project-header .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+        .project-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 24px 0 40px; }
+        .project-tags span { background: rgba(108, 99, 255, 0.15); color: var(--primary); padding: 6px 20px; border-radius: 20px; font-size: 0.9rem; font-weight: 500; }
+        .project-content h2 { font-size: 1.5rem; margin: 36px 0 16px; color: var(--text); }
+        .project-content h2::before { content: '▎'; color: var(--primary); }
+        .project-content p { color: var(--text-muted); margin-bottom: 16px; font-size: 1.05rem; }
+        .project-content ul { list-style: none; padding: 0; margin-bottom: 24px; }
+        .project-content ul li { color: var(--text-muted); padding: 10px 16px; margin-bottom: 8px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
+        .project-content ul li::before { content: '✅ '; }
+        .screenshot { width: 100%; height: 360px; background: linear-gradient(135deg, var(--bg-card), var(--border)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-muted); margin: 24px 0; border: 1px solid var(--border); }
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+        @media (max-width: 600px) {
+            .project-header h1 { font-size: 1.8rem; }
+            .project-content h2 { font-size: 1.3rem; }
+            .screenshot { height: 220px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-bar">
+            <a href="index.html" class="back-btn">← 返回主页</a>
+        </div>
+        <div class="project-header">
+            <div class="icon">🤖</div>
+            <h1>AI 助手应用</h1>
+            <p class="subtitle">智能对话与内容生成工具</p>
+            <div class="project-tags">
+                <span>Python</span>
+                <span>FastAPI</span>
+                <span>LLM</span>
+            </div>
+        </div>
+        <div class="screenshot">📷 项目截图预览</div>
+        <div class="project-content">
+            <h2>项目简介</h2>
+            <p>集成大语言模型的智能助手，支持自然对话、文档分析、代码生成等多种功能。</p>
+            <h2>核心功能</h2>
+            <ul>
+                <li>智能对话与上下文记忆</li>
+                <li>文档内容分析与总结</li>
+                <li>多语言代码生成</li>
+                <li>Markdown 实时渲染</li>
+                <li>对话历史导出</li>
+            </ul>
+            <h2>技术架构</h2>
+            <p>后端使用 Python FastAPI 构建 API 服务，前端采用响应式设计。
+            集成主流大语言模型，支持流式输出，实现打字机效果的实时回复。</p>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 阿昕. Made with ❤️</p>
+            <p style="margin-top: 8px;"><a href="index.html" style="color: var(--primary);">← 返回主页</a></p>
+        </div>
+    </footer>
+</body>
+</html>
