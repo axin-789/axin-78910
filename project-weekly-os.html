@@ -374,12 +374,15 @@
         }
         function openXHSApp() {
             closeXHSModal();
-            // 尝试打开小红书 App
-            window.location.href = 'xhs://user/profile/5ea226f100000000010042d9';
-            // 如果 1.5 秒后 App 没打开，跳转网页版
+            var now = Date.now();
+            // 尝试用 deep link 打开 App
+            window.location.href = 'intent://user/profile/5ea226f100000000010042d9#Intent;scheme=xhs;package=com.xingin.xhs;end';
+            // 如果 2 秒后 App 没打开，跳转网页版
             setTimeout(function() {
-                window.location.href = 'https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9';
-            }, 1500);
+                if (Date.now() - now < 1900) {
+                    window.location.href = 'https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9';
+                }
+            }, 2000);
         }
     </script>
 

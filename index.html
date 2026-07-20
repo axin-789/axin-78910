@@ -989,10 +989,13 @@
         }
         function openXHSApp() {
             closeXHSModal();
-            window.location.href = 'xhs://user/profile/5ea226f100000000010042d9';
+            var now = Date.now();
+            window.location.href = 'intent://user/profile/5ea226f100000000010042d9#Intent;scheme=xhs;package=com.xingin.xhs;end';
             setTimeout(function() {
-                window.location.href = 'https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9';
-            }, 1500);
+                if (Date.now() - now < 1900) {
+                    window.location.href = 'https://www.xiaohongshu.com/user/profile/5ea226f100000000010042d9';
+                }
+            }, 2000);
         }
     </script>
 
