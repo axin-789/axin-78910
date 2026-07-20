@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly OS · Obsidian 预置库 — 阿昕的作品</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6c63ff;
+            --primary-light: #8b83ff;
+            --secondary: #f50057;
+            --bg: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --bg-card-hover: #222244;
+            --text: #eaeaea;
+            --text-muted: #a0a0b8;
+            --border: #2a2a4a;
+            --radius: 16px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        /* 返回 */
+        .back-bar { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .back-btn:hover { color: var(--primary); }
+
+        /* 头部 */
+        .product-hero {
+            text-align: center;
+            padding: 40px 0 48px;
+        }
+        .product-hero .icon { font-size: 5rem; margin-bottom: 16px; }
+        .product-hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, #fff, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .product-hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 24px; }
+        .product-hero .price-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            padding: 12px 36px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* CTA 按钮组 */
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(108,99,255,0.35);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(108,99,255,0.5); }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
+        .btn-red {
+            background: linear-gradient(135deg, #ff2442, #ff6b81);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(255,36,66,0.3);
+        }
+        .btn-red:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,36,66,0.45); }
+        .btn-green {
+            background: linear-gradient(135deg, #07c160, #39d67e);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(7,193,96,0.3);
+        }
+        .btn-green:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(7,193,96,0.45); }
+
+        /* 标语 */
+        .tagline-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 40px;
+            margin: 32px 0;
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* 特性网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: all 0.3s;
+        }
+        .feature-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .feature-card .icon { font-size: 2rem; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* 模块列表 */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 32px 0;
+        }
+        .module-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        .module-item:hover { border-color: var(--primary); }
+        .module-item .icon { font-size: 1.5rem; }
+        .module-item .name { font-size: 0.95rem; font-weight: 500; }
+        .module-item .desc { font-size: 0.82rem; color: var(--text-muted); }
+
+        /* 深入介绍 */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 48px 0 24px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            margin-top: 8px;
+        }
+        .section-content p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+
+        /* 适合人群 */
+        .audience-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .audience-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .audience-item .icon { font-size: 2.2rem; margin-bottom: 8px; }
+        .audience-item h4 { font-size: 1rem; margin-bottom: 4px; }
+        .audience-item p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* CTA 大区域 */
+        .cta-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 48px 40px;
+            text-align: center;
+            margin: 48px 0;
+        }
+        .cta-section h2 { font-size: 1.8rem; margin-bottom: 12px; }
+        .cta-section p { color: var(--text-muted); margin-bottom: 24px; }
+
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+
+        @media (max-width: 600px) {
+            .product-hero h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .cta-section { padding: 32px 24px; }
+            .tagline-box { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 返回 -->
+        <div class="back-bar">
+            <a href="index.html" class="back-btn">← 返回主页</a>
+        </div>
+
+        <!-- Hero -->
+        <div class="product-hero">
+            <div class="icon">🗓️</div>
+            <h1>Weekly OS</h1>
+            <p class="subtitle">一个温柔而强大的 Obsidian 预置库 —— 让你的生活、学习与创作，在一个有序又自由的空间里自然生长。</p>
+            <div class="price-tag">💰 售价：¥XX.XX</div>
+            <div class="cta-group">
+                <a href="#" class="btn btn-red">📕 联系小红书</a>
+                <a href="#" class="btn btn-green">💬 添加微信</a>
+            </div>
+        </div>
+
+        <!-- 标语 -->
+        <div class="tagline-box">
+            "这里没有 KPI，没有「你应该」。<br>能写一行就很好。不完美但持续，好过完美但放弃。"
+        </div>
+
+        <!-- 适合人群 -->
+        <h2 class="section-title">🎯 适合谁用</h2>
+        <div class="audience-list">
+            <div class="audience-item">
+                <div class="icon">🎒</div>
+                <h4>学生党</h4>
+                <p>课堂笔记、备考整理、毕业论文</p>
+            </div>
+            <div class="audience-item">
+                <div class="icon">💼</div>
+                <h4>打工人</h4>
+                <p>工作日志、项目跟进、周报复盘</p>
+            </div>
+            <div class="audience-item">
+                <div class="icon">📚</div>
+                <h4>考研 / 读博</h4>
+                <p>文献阅读、知识体系搭建、研究记录</p>
+            </div>
+            <div class="audience-item">
+                <div class="icon">🧠</div>
+                <h4>知识工作者</h4>
+                <p>灵感捕捉、创作输出、个人知识管理</p>
+            </div>
+        </div>
+
+        <!-- 核心特性 -->
+        <h2 class="section-title">✨ 核心特性</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📄</div>
+                <h3>日记系统</h3>
+                <p>每日一页 + 周回顾 + 月回顾 + 年度回望。记录你的每一天，温柔而不强迫。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💡</div>
+                <h3>灵感管理</h3>
+                <p>灵感捕获 → 孵化器 → 落地执行。不让任何一个好想法溜走。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>能量追踪</h3>
+                <p>每日能量速记 + 能量日记。了解自己的精力节奏，合理安排生活。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">💜</div>
+                <h3>情绪陪伴</h3>
+                <p>情绪日志 + 自我对话 + 内在小孩角落。给自己一个安全的情绪空间。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📋</div>
+                <h3>任务管理</h3>
+                <p>日记内嵌任务收件箱，支持优先级、截止日期，全局看板一目了然。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📚</div>
+                <h3>知识管理</h3>
+                <p>微信读书同步 + 读书笔记（含详细模板）+ 视频笔记。知识不遗漏。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🎯</div>
+                <h3>项目管理</h3>
+                <p>项目孵化 → 执行追踪 → 复盘总结。从想法到完成的全流程管理。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🌸</div>
+                <h3>仪式系统</h3>
+                <p>晨间仪式 + 晚间仪式 + 周度仪式。用小小的仪式感锚定每一天。</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🧩</div>
+                <h3>模块化嵌入</h3>
+                <p>像搭乐高一样在任意笔记中嵌入感恩卡片、今日焦点等交互模块。</p>
+            </div>
+        </div>
+
+        <!-- 模块总览 -->
+        <h2 class="section-title">📂 开箱即用的文件夹结构</h2>
+        <div class="module-grid">
+            <div class="module-item"><span class="icon">📄</span><div><div class="name">日记</div><div class="desc">每日 · 周 · 月 · 年</div></div></div>
+            <div class="module-item"><span class="icon">💡</span><div><div class="name">灵感</div><div class="desc">捕获 · 孵化 · 梦境</div></div></div>
+            <div class="module-item"><span class="icon">⚡</span><div><div class="name">能量</div><div class="desc">日记 · 速记</div></div></div>
+            <div class="module-item"><span class="icon">💜</span><div><div class="name">情绪</div><div class="desc">日志 · 内在小孩 · 过度思考</div></div></div>
+            <div class="module-item"><span class="icon">🎯</span><div><div class="name">项目</div><div class="desc">孵化 · 执行 · 复盘</div></div></div>
+            <div class="module-item"><span class="icon">📚</span><div><div class="name">知识</div><div class="desc">读书笔记 · 微信读书 · 视频</div></div></div>
+            <div class="module-item"><span class="icon">🤝</span><div><div class="name">人际</div><div class="desc">关系记录</div></div></div>
+            <div class="module-item"><span class="icon">✍️</span><div><div class="name">创作</div><div class="desc">写作 · 小红书</div></div></div>
+            <div class="module-item"><span class="icon">🔍</span><div><div class="name">反思</div><div class="desc">温柔复盘 · 季度愿景板</div></div></div>
+            <div class="module-item"><span class="icon">☀️</span><div><div class="name">仪式</div><div class="desc">晨间 · 晚间 · 周度</div></div></div>
+            <div class="module-item"><span class="icon">🏠</span><div><div class="name">生活</div><div class="desc">账本 · 钱包</div></div></div>
+            <div class="module-item"><span class="icon">📥</span><div><div class="name">收件箱</div><div class="desc">临时想法归集</div></div></div>
+        </div>
+
+        <!-- 理念 -->
+        <h2 class="section-title">🌿 设计理念</h2>
+        <div class="section-content">
+            <p>Weekly OS 不是一个让你「更高效」的工具。它不是让你每天打卡、攒连续天数、变成更自律的人。</p>
+            <p>它是为了让你在混乱的思绪里找到一个可以呼吸的地方。</p>
+            <p>这里没有 KPI，没有「你应该」。能写一行就是胜利，不想写就不写，它一直在。</p>
+            <p>这个系统已经集成了 <strong>Dataview</strong>、<strong>Templater</strong>、<strong>Meta-Bind</strong> 等核心插件配置，下载导入即可使用，无需任何手动设置。</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>💝 想要拥有 Weekly OS？</h2>
+            <p>点击下方按钮，联系我获取购买方式和更多详情</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-red">📕 小红书</a>
+                <a href="#" class="btn btn-green">💬 添加微信</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 阿昕. Made with ❤️</p>
+            <p style="margin-top: 8px;"><a href="index.html" style="color: var(--primary);">← 返回主页</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
