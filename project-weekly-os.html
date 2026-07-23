@@ -7,204 +7,191 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #6c63ff;
-            --primary-light: #8b83ff;
-            --secondary: #f50057;
-            --bg: #0f0f1a;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #222244;
-            --text: #eaeaea;
-            --text-muted: #a0a0b8;
-            --border: #2a2a4a;
+            --primary: #a855f7;
+            --primary-light: #c084fc;
+            --secondary: #ec4899;
+            --gradient: linear-gradient(135deg, #a855f7, #ec4899);
+            --bg: #000000;
+            --bg-surface: rgba(255,255,255,0.04);
+            --bg-surface-hover: rgba(255,255,255,0.08);
+            --text: #ffffff;
+            --text-secondary: rgba(255,255,255,0.7);
+            --text-muted: rgba(255,255,255,0.45);
+            --text-dim: rgba(255,255,255,0.25);
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
             --radius: 16px;
-            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --radius-lg: 24px;
+            --shadow: 0 0 60px rgba(168,85,247,0.12);
+            --transition: 0.4s cubic-bezier(0.22,1,0.36,1);
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        .glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(140px);
+            opacity: 0.2;
+        }
+        .glow-1 { top: -200px; right: -200px; background: #a855f7; }
+        .glow-2 { bottom: -250px; left: -200px; background: #ec4899; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
         /* 返回 */
-        .back-bar { padding: 24px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-        .back-btn:hover { color: var(--primary); }
+        .back-bar { padding: 28px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color var(--transition); }
+        .back-btn:hover { color: var(--primary-light); }
 
         /* 头部 */
-        .product-hero {
-            text-align: center;
-            padding: 40px 0 48px;
-        }
-        .product-hero .icon { font-size: 5rem; margin-bottom: 16px; }
-        .product-hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, #fff, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .product-hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 24px; }
+        .product-hero { text-align: center; padding: 40px 0 48px; }
+        .product-hero .icon { font-size: 5rem; margin-bottom: 20px; }
+        .product-hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.03em; background: linear-gradient(135deg, #fff, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .product-hero .subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
         .product-hero .price-tag {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient);
             color: #fff;
-            padding: 12px 36px;
-            border-radius: 50px;
+            padding: 12px 40px;
+            border-radius: 100px;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 16px;
+            box-shadow: 0 4px 24px rgba(168,85,247,0.3);
         }
 
         /* CTA 按钮组 */
-        .cta-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 24px 0;
-        }
+        .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 28px 0; }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 36px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 36px; border-radius: 100px;
+            font-size: 1rem; font-weight: 500; border: none;
+            cursor: pointer; transition: var(--transition); text-decoration: none;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(108,99,255,0.35);
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(108,99,255,0.5); }
-        .btn-outline {
-            background: transparent;
-            color: var(--text);
-            border: 2px solid var(--border);
-        }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
-        .btn-red {
-            background: linear-gradient(135deg, #ff2442, #ff6b81);
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(255,36,66,0.3);
-        }
-        .btn-red:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,36,66,0.45); }
-        .btn-green {
-            background: linear-gradient(135deg, #07c160, #39d67e);
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(7,193,96,0.3);
-        }
-        .btn-green:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(7,193,96,0.45); }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-red { background: linear-gradient(135deg, #ff2442, #ff6b81); color: #fff; box-shadow: 0 4px 20px rgba(255,36,66,0.3); }
+        .btn-red:hover { box-shadow: 0 8px 30px rgba(255,36,66,0.45); }
+        .btn-green { background: linear-gradient(135deg, #07c160, #39d67e); color: #fff; box-shadow: 0 4px 20px rgba(7,193,96,0.3); }
+        .btn-green:hover { box-shadow: 0 8px 30px rgba(7,193,96,0.45); }
 
         /* 标语 */
         .tagline-box {
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 32px 40px;
-            margin: 32px 0;
+            border-radius: var(--radius-lg);
+            padding: 40px 48px;
+            margin: 40px 0;
             text-align: center;
             font-size: 1.15rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-style: italic;
             border-left: 4px solid var(--primary);
+            backdrop-filter: blur(12px);
         }
 
         /* 特性网格 */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
         .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            transition: all 0.3s;
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 28px 24px;
+            transition: var(--transition); backdrop-filter: blur(12px);
         }
-        .feature-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .feature-card:hover { background: var(--bg-surface-hover); border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow); }
         .feature-card .icon { font-size: 2rem; margin-bottom: 12px; }
-        .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .feature-card p { font-size: 0.9rem; color: var(--text-muted); }
+        .feature-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
 
         /* 模块列表 */
-        .module-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin: 32px 0;
-        }
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 32px 0; }
         .module-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s;
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px;
+            transition: var(--transition);
         }
-        .module-item:hover { border-color: var(--primary); }
+        .module-item:hover { border-color: var(--primary); background: var(--bg-surface-hover); }
         .module-item .icon { font-size: 1.5rem; }
         .module-item .name { font-size: 0.95rem; font-weight: 500; }
         .module-item .desc { font-size: 0.82rem; color: var(--text-muted); }
 
         /* 深入介绍 */
         .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 48px 0 24px;
-            position: relative;
+            font-size: 1.8rem; font-weight: 700;
+            margin: 48px 0 24px; letter-spacing: -0.02em;
         }
         .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
+            content: ''; display: block;
+            width: 50px; height: 3px;
+            background: var(--gradient); border-radius: 2px;
             margin-top: 8px;
         }
-        .section-content p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 16px;
-        }
+        .section-content p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 16px; line-height: 1.8; }
 
         /* 适合人群 */
-        .audience-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
-        }
+        .audience-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 28px 0; }
         .audience-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 24px 20px;
+            text-align: center; transition: var(--transition);
         }
+        .audience-item:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .audience-item .icon { font-size: 2.2rem; margin-bottom: 8px; }
-        .audience-item h4 { font-size: 1rem; margin-bottom: 4px; }
+        .audience-item h4 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; }
         .audience-item p { font-size: 0.85rem; color: var(--text-muted); }
 
         /* CTA 大区域 */
         .cta-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 48px 40px;
-            text-align: center;
-            margin: 48px 0;
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 56px 40px;
+            text-align: center; margin: 48px 0;
+            backdrop-filter: blur(12px);
         }
-        .cta-section h2 { font-size: 1.8rem; margin-bottom: 12px; }
+        .cta-section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 12px; }
         .cta-section p { color: var(--text-muted); margin-bottom: 24px; }
 
-        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+        footer { text-align: center; padding: 48px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.85rem; margin-top: 60px; }
+
+        /* 弹窗 */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+            z-index: 9999; align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background: #0a0a0f; border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 40px 36px;
+            max-width: 340px; width: 90%; text-align: center;
+            box-shadow: 0 0 60px rgba(168,85,247,0.1);
+        }
+        .modal-box .icon-big { font-size: 3rem; margin-bottom: 12px; }
+        .modal-box h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+        .modal-box .hint { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; }
+        .modal-box .code-display {
+            background: #000; border: 1px solid var(--border);
+            border-radius: 12px; padding: 14px;
+            font-size: 1.3rem; color: var(--text);
+            font-weight: 700; letter-spacing: 2px; margin-bottom: 20px;
+            text-align: center; user-select: all;
+        }
+        .modal-box .copy-btn {
+            width: 100%; padding: 12px; border-radius: 12px;
+            border: none; font-size: 1rem; font-weight: 500;
+            cursor: pointer; transition: var(--transition);
+        }
+        .modal-box .close-btn {
+            width: 100%; padding: 10px; border-radius: 12px;
+            border: none; background: transparent; color: var(--text-muted);
+            font-size: 0.9rem; cursor: pointer; margin-top: 4px;
+        }
+        .modal-box .close-btn:hover { color: var(--text); }
 
         @media (max-width: 600px) {
             .product-hero h1 { font-size: 1.8rem; }
@@ -215,14 +202,38 @@
     </style>
 </head>
 <body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <!-- 小红书弹窗 -->
+    <div class="modal-overlay" id="xhsModal" onclick="closeXHSModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="icon-big">📕</div>
+            <h3>关注小红书</h3>
+            <p class="hint">请复制小红书号，打开 App 搜索关注</p>
+            <div class="code-display" id="xhsLink">462105441</div>
+            <button onclick="copyXHS()" class="copy-btn" style="background:linear-gradient(135deg,#ff2442,#ff6b81);color:#fff;">复制小红书号</button>
+            <button onclick="closeXHSModal()" class="close-btn">关闭</button>
+        </div>
+    </div>
+
+    <!-- 微信弹窗 -->
+    <div class="modal-overlay" id="wechatModal" onclick="closeWeChatModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="icon-big">💬</div>
+            <h3>添加微信</h3>
+            <p class="hint">请复制微信号，在微信中搜索添加</p>
+            <div class="code-display" id="wechatLink">gfyfyfwfff</div>
+            <button onclick="copyWeChat()" class="copy-btn" style="background:linear-gradient(135deg,#07c160,#39d67e);color:#fff;">复制微信号</button>
+            <button onclick="closeWeChatModal()" class="close-btn">关闭</button>
+        </div>
+    </div>
 
     <div class="container">
-        <!-- 返回 -->
         <div class="back-bar">
             <a href="index.html" class="back-btn">← 返回主页</a>
         </div>
 
-        <!-- Hero -->
         <div class="product-hero">
             <div class="icon">🗓️</div>
             <h1>Weekly OS</h1>
@@ -234,87 +245,31 @@
             </div>
         </div>
 
-        <!-- 标语 -->
         <div class="tagline-box">
             "这里没有 KPI，没有「你应该」。<br>能写一行就很好。不完美但持续，好过完美但放弃。"
         </div>
 
-        <!-- 适合人群 -->
         <h2 class="section-title">🎯 适合谁用</h2>
         <div class="audience-list">
-            <div class="audience-item">
-                <div class="icon">🎒</div>
-                <h4>学生党</h4>
-                <p>课堂笔记、备考整理、毕业论文</p>
-            </div>
-            <div class="audience-item">
-                <div class="icon">💼</div>
-                <h4>打工人</h4>
-                <p>工作日志、项目跟进、周报复盘</p>
-            </div>
-            <div class="audience-item">
-                <div class="icon">📚</div>
-                <h4>考研 / 读博</h4>
-                <p>文献阅读、知识体系搭建、研究记录</p>
-            </div>
-            <div class="audience-item">
-                <div class="icon">🧠</div>
-                <h4>知识工作者</h4>
-                <p>灵感捕捉、创作输出、个人知识管理</p>
-            </div>
+            <div class="audience-item"><div class="icon">🎒</div><h4>学生党</h4><p>课堂笔记、备考整理、毕业论文</p></div>
+            <div class="audience-item"><div class="icon">💼</div><h4>打工人</h4><p>工作日志、项目跟进、周报复盘</p></div>
+            <div class="audience-item"><div class="icon">📚</div><h4>考研 / 读博</h4><p>文献阅读、知识体系搭建、研究记录</p></div>
+            <div class="audience-item"><div class="icon">🧠</div><h4>知识工作者</h4><p>灵感捕捉、创作输出、个人知识管理</p></div>
         </div>
 
-        <!-- 核心特性 -->
         <h2 class="section-title">✨ 核心特性</h2>
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="icon">📄</div>
-                <h3>日记系统</h3>
-                <p>每日一页 + 周回顾 + 月回顾 + 年度回望。记录你的每一天，温柔而不强迫。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">💡</div>
-                <h3>灵感管理</h3>
-                <p>灵感捕获 → 孵化器 → 落地执行。不让任何一个好想法溜走。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">⚡</div>
-                <h3>能量追踪</h3>
-                <p>每日能量速记 + 能量日记。了解自己的精力节奏，合理安排生活。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">💜</div>
-                <h3>情绪陪伴</h3>
-                <p>情绪日志 + 自我对话 + 内在小孩角落。给自己一个安全的情绪空间。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📋</div>
-                <h3>任务管理</h3>
-                <p>日记内嵌任务收件箱，支持优先级、截止日期，全局看板一目了然。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📚</div>
-                <h3>知识管理</h3>
-                <p>微信读书同步 + 读书笔记（含详细模板）+ 视频笔记。知识不遗漏。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🎯</div>
-                <h3>项目管理</h3>
-                <p>项目孵化 → 执行追踪 → 复盘总结。从想法到完成的全流程管理。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🌸</div>
-                <h3>仪式系统</h3>
-                <p>晨间仪式 + 晚间仪式 + 周度仪式。用小小的仪式感锚定每一天。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🧩</div>
-                <h3>模块化嵌入</h3>
-                <p>像搭乐高一样在任意笔记中嵌入感恩卡片、今日焦点等交互模块。</p>
-            </div>
+            <div class="feature-card"><div class="icon">📄</div><h3>日记系统</h3><p>每日一页 + 周回顾 + 月回顾 + 年度回望。记录你的每一天，温柔而不强迫。</p></div>
+            <div class="feature-card"><div class="icon">💡</div><h3>灵感管理</h3><p>灵感捕获 → 孵化器 → 落地执行。不让任何一个好想法溜走。</p></div>
+            <div class="feature-card"><div class="icon">⚡</div><h3>能量追踪</h3><p>每日能量速记 + 能量日记。了解自己的精力节奏，合理安排生活。</p></div>
+            <div class="feature-card"><div class="icon">💜</div><h3>情绪陪伴</h3><p>情绪日志 + 自我对话 + 内在小孩角落。给自己一个安全的情绪空间。</p></div>
+            <div class="feature-card"><div class="icon">📋</div><h3>任务管理</h3><p>日记内嵌任务收件箱，支持优先级、截止日期，全局看板一目了然。</p></div>
+            <div class="feature-card"><div class="icon">📚</div><h3>知识管理</h3><p>微信读书同步 + 读书笔记（含详细模板）+ 视频笔记。知识不遗漏。</p></div>
+            <div class="feature-card"><div class="icon">🎯</div><h3>项目管理</h3><p>项目孵化 → 执行追踪 → 复盘总结。从想法到完成的全流程管理。</p></div>
+            <div class="feature-card"><div class="icon">🌸</div><h3>仪式系统</h3><p>晨间仪式 + 晚间仪式 + 周度仪式。用小小的仪式感锚定每一天。</p></div>
+            <div class="feature-card"><div class="icon">🧩</div><h3>模块化嵌入</h3><p>像搭乐高一样在任意笔记中嵌入感恩卡片、今日焦点等交互模块。</p></div>
         </div>
 
-        <!-- 模块总览 -->
         <h2 class="section-title">📂 开箱即用的文件夹结构</h2>
         <div class="module-grid">
             <div class="module-item"><span class="icon">📄</span><div><div class="name">日记</div><div class="desc">每日 · 周 · 月 · 年</div></div></div>
@@ -331,7 +286,6 @@
             <div class="module-item"><span class="icon">📥</span><div><div class="name">收件箱</div><div class="desc">临时想法归集</div></div></div>
         </div>
 
-        <!-- 理念 -->
         <h2 class="section-title">🌿 设计理念</h2>
         <div class="section-content">
             <p>Weekly OS 不是一个让你「更高效」的工具。它不是让你每天打卡、攒连续天数、变成更自律的人。</p>
@@ -340,7 +294,6 @@
             <p>这个系统已经集成了 <strong>Dataview</strong>、<strong>Templater</strong>、<strong>Meta-Bind</strong> 等核心插件配置，下载导入即可使用，无需任何手动设置。</p>
         </div>
 
-        <!-- CTA -->
         <div class="cta-section">
             <h2>💝 想要拥有 Weekly OS？</h2>
             <p>点击下方按钮，联系我获取购买方式和更多详情</p>
@@ -349,74 +302,36 @@
                 <a href="#" class="btn btn-green" onclick="openWeChat(); return false;">💬 添加微信</a>
             </div>
         </div>
-
-    </div>
-
-    <!-- 小红书弹窗 -->
-    <div id="xhsModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;" onclick="closeXHSModal()">
-        <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:20px;padding:36px 32px;max-width:340px;width:90%;text-align:center;" onclick="event.stopPropagation()">
-            <div style="font-size:3rem;margin-bottom:12px;">📕</div>
-            <h3 style="font-size:1.2rem;margin-bottom:8px;">关注小红书</h3>
-            <p style="color:#a0a0b8;font-size:0.95rem;margin-bottom:8px;">请复制小红书号，打开 App 搜索关注</p>
-            <div id="xhsLink" style="background:#0f0f1a;border:1px solid #2a2a4a;border-radius:12px;padding:14px;font-size:1.3rem;color:#eaeaea;font-weight:700;letter-spacing:2px;margin-bottom:20px;text-align:center;user-select:all;">462105441</div>
-            <button onclick="copyXHS()" id="xhsCopyBtn" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#ff2442,#ff6b81);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">复制小红书号</button>
-            <button onclick="closeXHSModal()" style="width:100%;padding:10px;border-radius:12px;border:none;background:transparent;color:#a0a0b8;font-size:0.9rem;cursor:pointer;margin-top:8px;">关闭</button>
-        </div>
-    </div>
-
-    <!-- 微信弹窗 -->
-    <div id="wechatModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;" onclick="closeWeChatModal()">
-        <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:20px;padding:36px 32px;max-width:340px;width:90%;text-align:center;" onclick="event.stopPropagation()">
-            <div style="font-size:3rem;margin-bottom:12px;">💬</div>
-            <h3 style="font-size:1.2rem;margin-bottom:8px;">添加微信</h3>
-            <p style="color:#a0a0b8;font-size:0.95rem;margin-bottom:8px;">请复制微信号，在微信中搜索添加</p>
-            <div id="wechatLink" style="background:#0f0f1a;border:1px solid #2a2a4a;border-radius:12px;padding:14px;font-size:1.3rem;color:#eaeaea;font-weight:700;letter-spacing:2px;margin-bottom:20px;text-align:center;user-select:all;">gfyfyfwfff</div>
-            <button onclick="copyWeChat()" id="wechatCopyBtn" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#07c160,#39d67e);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">复制微信号</button>
-            <button onclick="closeWeChatModal()" style="width:100%;padding:10px;border-radius:12px;border:none;background:transparent;color:#a0a0b8;font-size:0.9rem;cursor:pointer;margin-top:8px;">关闭</button>
-        </div>
     </div>
 
     <script>
-        function openXHS() {
-            document.getElementById('xhsModal').style.display = 'flex';
-        }
-        function closeXHSModal() {
-            document.getElementById('xhsModal').style.display = 'none';
-        }
+        function openXHS() { document.getElementById('xhsModal').style.display = 'flex'; }
+        function closeXHSModal() { document.getElementById('xhsModal').style.display = 'none'; }
         function copyXHS() {
             var text = document.getElementById('xhsLink').textContent;
             navigator.clipboard.writeText(text).then(function() {
-                var btn = document.getElementById('xhsCopyBtn');
+                var btn = document.querySelector('#xhsModal .copy-btn');
                 btn.textContent = '✅ 已复制！';
                 setTimeout(function() { btn.textContent = '复制小红书号'; }, 2000);
-            }).catch(function() {
-                alert('复制失败，请手动选择复制');
-            });
+            }).catch(function() { alert('复制失败'); });
         }
-        function openWeChat() {
-            document.getElementById('wechatModal').style.display = 'flex';
-        }
-        function closeWeChatModal() {
-            document.getElementById('wechatModal').style.display = 'none';
-        }
+        function openWeChat() { document.getElementById('wechatModal').style.display = 'flex'; }
+        function closeWeChatModal() { document.getElementById('wechatModal').style.display = 'none'; }
         function copyWeChat() {
             var text = document.getElementById('wechatLink').textContent;
             navigator.clipboard.writeText(text).then(function() {
-                var btn = document.getElementById('wechatCopyBtn');
+                var btn = document.querySelector('#wechatModal .copy-btn');
                 btn.textContent = '✅ 已复制！';
                 setTimeout(function() { btn.textContent = '复制微信号'; }, 2000);
-            }).catch(function() {
-                alert('复制失败，请手动选择复制');
-            });
+            }).catch(function() { alert('复制失败'); });
         }
     </script>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 阿昕. Made with ❤️</p>
-            <p style="margin-top: 8px;"><a href="index.html" style="color: var(--primary);">← 返回主页</a></p>
+            <p>&copy; 2026 阿昕 · Made with ❤️</p>
+            <p style="margin-top: 8px;"><a href="index.html" style="color: var(--primary-light);">← 返回主页</a></p>
         </div>
     </footer>
-
 </body>
 </html>

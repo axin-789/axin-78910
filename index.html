@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>axin-789 的个人简介 | 欢迎来到我的世界</title>
+    <title>阿昕 · Moonshot AI style</title>
     <style>
-        /* ===== 全局重置 & 基础 ===== */
+        /* ===== 月之暗面 · 品牌设计系统 ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,18 +13,27 @@
         }
 
         :root {
-            --primary: #6c63ff;
-            --primary-dark: #5a52d5;
-            --secondary: #f50057;
-            --bg: #0f0f1a;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #222244;
-            --text: #eaeaea;
-            --text-muted: #a0a0b8;
-            --border: #2a2a4a;
+            --primary: #a855f7;
+            --primary-light: #c084fc;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --accent-gradient: linear-gradient(135deg, #a855f7, #ec4899);
+            --bg: #000000;
+            --bg-surface: rgba(255, 255, 255, 0.04);
+            --bg-surface-hover: rgba(255, 255, 255, 0.08);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --text: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.45);
+            --text-dim: rgba(255, 255, 255, 0.25);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --radius-sm: 8px;
             --radius: 16px;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --shadow-glow: 0 0 60px rgba(168, 85, 247, 0.15);
+            --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         html {
@@ -36,12 +45,13 @@
                 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.7;
+            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         a {
-            color: var(--primary);
+            color: var(--primary-light);
             text-decoration: none;
             transition: color var(--transition);
         }
@@ -61,31 +71,59 @@
         }
 
         section {
-            padding: 100px 0;
+            padding: 120px 0;
+            position: relative;
         }
 
         .section-title {
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 16px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-            margin: 12px auto 0;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
             text-align: center;
             color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 56px;
+            font-size: 1.1rem;
+            margin-bottom: 64px;
+            font-weight: 400;
+        }
+
+        /* ===== 背景光晕 ===== */
+        .glow-orbe {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(120px);
+            opacity: 0.3;
+        }
+        .glow-1 {
+            top: -200px;
+            right: -200px;
+            background: #a855f7;
+        }
+        .glow-2 {
+            bottom: -300px;
+            left: -200px;
+            background: #ec4899;
+        }
+        .glow-3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #6366f1;
+            opacity: 0.08;
+            width: 800px;
+            height: 800px;
         }
 
         /* ===== 粒子背景 ===== */
@@ -97,6 +135,7 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
+            opacity: 0.5;
         }
 
         /* ===== 导航栏 ===== */
@@ -106,13 +145,14 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 16px 0;
-            transition: background var(--transition), box-shadow var(--transition);
+            padding: 20px 0;
+            transition: background var(--transition), backdrop-filter var(--transition);
         }
         .navbar.scrolled {
-            background: rgba(15, 15, 26, 0.92);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 1px 0 var(--border);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px) saturate(1.5);
+            -webkit-backdrop-filter: blur(20px) saturate(1.5);
+            border-bottom: 1px solid var(--border);
         }
 
         .nav-inner {
@@ -122,26 +162,43 @@
         }
 
         .nav-logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 36px;
             list-style: none;
         }
         .nav-links a {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 450;
+            letter-spacing: 0.3px;
             transition: color var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent-gradient);
+            transition: width var(--transition);
         }
         .nav-links a:hover {
             color: var(--text);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .hamburger {
@@ -152,10 +209,11 @@
             background: none;
             border: none;
             padding: 4px;
+            z-index: 1001;
         }
         .hamburger span {
-            width: 26px;
-            height: 2.5px;
+            width: 24px;
+            height: 2px;
             background: var(--text);
             border-radius: 2px;
             transition: var(--transition);
@@ -170,58 +228,84 @@
             position: relative;
             z-index: 1;
             padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         .hero-content {
             text-align: center;
-            max-width: 720px;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
         }
 
-        .hero-avatar {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            margin: 0 auto 32px;
-            display: flex;
+        .hero-badge {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            color: #fff;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 0 40px rgba(108, 99, 255, 0.3);
+            gap: 8px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
         }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 4rem;
             font-weight: 800;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            background: linear-gradient(135deg, #fff 30%, var(--primary-light), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero .tagline {
             font-size: 1.2rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-bottom: 8px;
+            font-weight: 400;
         }
 
         .hero .typed-wrap {
-            font-size: 1.3rem;
-            color: var(--primary);
+            font-size: 1.15rem;
+            color: var(--text-muted);
             min-height: 2rem;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
+        }
+        .hero .typed-wrap .cursor {
+            color: var(--primary);
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
         .hero-actions {
@@ -236,34 +320,37 @@
             align-items: center;
             gap: 8px;
             padding: 14px 36px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 500;
             border: none;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
+            letter-spacing: 0.2px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--accent-gradient);
             color: #fff;
-            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35);
+            box-shadow: 0 4px 24px rgba(168, 85, 247, 0.3);
         }
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(108, 99, 255, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(168, 85, 247, 0.45);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--text);
-            border: 2px solid var(--border);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
         }
         .btn-outline:hover {
             border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-3px);
+            color: var(--text);
+            background: rgba(168, 85, 247, 0.08);
+            transform: translateY(-2px);
         }
 
         .scroll-indicator {
@@ -275,24 +362,19 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            animation: bounce 2s infinite;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            animation: bounce 2.5s infinite;
         }
         @keyframes bounce {
-            0%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(8px);
-            }
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
         }
         .scroll-indicator .arrow {
-            width: 24px;
-            height: 24px;
-            border-right: 2px solid var(--text-muted);
-            border-bottom: 2px solid var(--text-muted);
+            width: 20px;
+            height: 20px;
+            border-right: 1.5px solid var(--text-dim);
+            border-bottom: 1.5px solid var(--text-dim);
             transform: rotate(45deg);
         }
 
@@ -300,14 +382,22 @@
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            gap: 56px;
             align-items: start;
         }
 
         .about-text p {
-            color: var(--text-muted);
-            margin-bottom: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
             font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .about-text strong {
+            color: var(--text);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .about-info {
@@ -316,41 +406,51 @@
             gap: 12px;
         }
         .about-info .item {
-            background: var(--bg-card);
-            padding: 16px 20px;
-            border-radius: 12px;
+            background: var(--bg-surface);
+            padding: 20px 24px;
+            border-radius: var(--radius);
             border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+        .about-info .item:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
         }
         .about-info .item .label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
         }
         .about-info .item .value {
             font-size: 1rem;
-            font-weight: 600;
-            margin-top: 4px;
+            font-weight: 500;
+            color: var(--text);
         }
 
         /* ===== Skills ===== */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            gap: 16px;
         }
 
         .skill-card {
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 28px 24px;
             transition: var(--transition);
+            backdrop-filter: blur(12px);
         }
         .skill-card:hover {
-            background: var(--bg-card-hover);
+            background: var(--bg-surface-hover);
+            border-color: var(--border-hover);
             transform: translateY(-4px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-glow);
         }
 
         .skill-card .icon {
@@ -358,35 +458,37 @@
             margin-bottom: 12px;
         }
         .skill-card h3 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 8px;
+            color: var(--text);
         }
         .skill-card p {
             font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .skill-bar-wrap {
             width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 3px;
             overflow: hidden;
         }
         .skill-bar {
             height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+            background: var(--accent-gradient);
             width: 0;
-            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .skill-bar-label {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         /* ===== Timeline ===== */
@@ -397,17 +499,17 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 14px;
+            left: 15px;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            width: 1.5px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary), transparent);
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 40px;
-            padding-left: 32px;
+            margin-bottom: 44px;
+            padding-left: 36px;
         }
         .timeline-item:last-child {
             margin-bottom: 0;
@@ -416,76 +518,84 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -32px;
+            left: -33px;
             top: 6px;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: var(--primary);
-            border: 3px solid var(--bg);
-            box-shadow: 0 0 0 2px var(--primary);
+            border: 3px solid #000;
+            box-shadow: 0 0 0 2px var(--primary), 0 0 20px rgba(168, 85, 247, 0.3);
         }
 
         .timeline-item .date {
-            font-size: 0.85rem;
-            color: var(--primary);
-            font-weight: 600;
+            font-size: 0.82rem;
+            color: var(--primary-light);
+            font-weight: 500;
             margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
         .timeline-item h3 {
             font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 4px;
         }
         .timeline-item .company {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             margin-bottom: 8px;
         }
         .timeline-item p {
             color: var(--text-muted);
-            font-size: 0.92rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
         }
 
         /* ===== Projects ===== */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            gap: 20px;
         }
 
         .project-card {
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             transition: var(--transition);
+            backdrop-filter: blur(12px);
         }
         .project-card:hover {
             transform: translateY(-6px);
-            box-shadow: var(--shadow);
-            border-color: var(--primary);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: var(--shadow-glow);
+            background: var(--bg-surface-hover);
         }
 
         .project-card .thumb {
             height: 200px;
-            background: linear-gradient(135deg, var(--bg-card-hover), var(--border));
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(236, 73, 153, 0.08));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .project-card .body {
-            padding: 24px;
+            padding: 28px;
         }
         .project-card .body h3 {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 8px;
         }
         .project-card .body p {
             color: var(--text-muted);
             font-size: 0.9rem;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            line-height: 1.7;
         }
 
         .project-tags {
@@ -494,28 +604,47 @@
             gap: 8px;
         }
         .project-tags span {
-            background: rgba(108, 99, 255, 0.15);
-            color: var(--primary);
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--primary-light);
             padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 450;
+            border: 1px solid rgba(168, 85, 247, 0.1);
+        }
+
+        .project-card .body .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--primary-light);
             font-weight: 500;
+            transition: var(--transition);
+        }
+        .project-card .body .project-link:hover {
+            color: var(--secondary);
+            gap: 10px;
         }
 
         /* ===== Contact ===== */
         .contact-wrap {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            gap: 56px;
         }
 
         .contact-info h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 16px;
         }
         .contact-info p {
             color: var(--text-muted);
-            margin-bottom: 32px;
+            margin-bottom: 36px;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         .contact-item {
@@ -528,21 +657,23 @@
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
         .contact-item .text {
             font-size: 0.95rem;
+            color: var(--text-secondary);
         }
         .contact-item .text a {
             color: var(--text);
         }
         .contact-item .text a:hover {
-            color: var(--primary);
+            color: var(--primary-light);
         }
 
         .contact-form {
@@ -552,10 +683,10 @@
         }
         .contact-form input,
         .contact-form textarea {
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 14px 18px;
+            padding: 16px 20px;
             color: var(--text);
             font-size: 0.95rem;
             font-family: inherit;
@@ -565,7 +696,12 @@
         .contact-form input:focus,
         .contact-form textarea:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+            background: var(--bg-surface-hover);
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-dim);
         }
         .contact-form textarea {
             min-height: 140px;
@@ -577,14 +713,14 @@
 
         .social-links {
             display: flex;
-            gap: 16px;
-            margin-top: 24px;
+            gap: 12px;
+            margin-top: 28px;
         }
         .social-links a {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
@@ -592,20 +728,144 @@
             font-size: 1.2rem;
             transition: var(--transition);
             color: var(--text-muted);
+            backdrop-filter: blur(10px);
         }
         .social-links a:hover {
             border-color: var(--primary);
             color: var(--primary);
+            background: rgba(168, 85, 247, 0.1);
             transform: translateY(-3px);
         }
 
         /* ===== Footer ===== */
         footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 48px 0;
             border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ===== Toast 提示 ===== */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            padding: 14px 28px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== 弹窗 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-box {
+            background: #0a0a0f;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 36px;
+            max-width: 340px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.1);
+        }
+        .modal-box .icon-big {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+        .modal-box h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .modal-box .hint {
             color: var(--text-muted);
             font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .modal-box .code-display {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 1.3rem;
+            color: var(--text);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+            user-select: all;
+        }
+        .modal-box .copy-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal-box .copy-btn.xhs {
+            background: linear-gradient(135deg, #ff2442, #ff6b81);
+            color: #fff;
+        }
+        .modal-box .copy-btn.wechat {
+            background: linear-gradient(135deg, #07c160, #39d67e);
+            color: #fff;
+        }
+        .modal-box .copy-btn:active {
+            transform: scale(0.97);
+        }
+        .modal-box .close-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: var(--transition);
+        }
+        .modal-box .close-btn:hover {
+            color: var(--text);
+        }
+
+        /* ===== 淡入动画 ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ===== 响应式 ===== */
@@ -616,12 +876,14 @@
                 right: -100%;
                 width: 260px;
                 height: 100vh;
-                background: var(--bg-card);
+                background: rgba(0, 0, 0, 0.92);
+                backdrop-filter: blur(24px);
                 flex-direction: column;
                 padding: 80px 32px 32px;
-                gap: 24px;
-                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: -8px 0 30px rgba(0, 0, 0, 0.4);
+                gap: 28px;
+                transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+                border-left: 1px solid var(--border);
             }
             .nav-links.open {
                 right: 0;
@@ -641,7 +903,7 @@
             }
 
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.6rem;
             }
 
             .about-grid,
@@ -654,17 +916,20 @@
             }
 
             section {
-                padding: 60px 0;
+                padding: 80px 0;
             }
 
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 480px) {
+            section {
+                padding: 60px 0;
+            }
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             .hero-actions {
                 flex-direction: column;
@@ -674,43 +939,22 @@
                 width: 100%;
                 justify-content: center;
             }
-        }
-
-        /* ===== 淡入动画 ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== Toast 提示 ===== */
-        .toast {
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 9999;
-            pointer-events: none;
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .about-info .item {
+                padding: 16px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- 背景光晕 -->
+    <div class="glow-orbe glow-1"></div>
+    <div class="glow-orbe glow-2"></div>
+    <div class="glow-orbe glow-3"></div>
 
     <!-- 粒子背景 -->
     <canvas id="particles-canvas"></canvas>
@@ -718,10 +962,34 @@
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
+    <!-- ===== 小红书弹窗 ===== -->
+    <div class="modal-overlay" id="xhsModal" onclick="closeXHSModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="icon-big">📕</div>
+            <h3>关注小红书</h3>
+            <p class="hint">请复制小红书号，打开 App 搜索关注</p>
+            <div class="code-display" id="xhsLink">462105441</div>
+            <button onclick="copyXHS()" class="copy-btn xhs" id="xhsCopyBtn">复制小红书号</button>
+            <button onclick="closeXHSModal()" class="close-btn">关闭</button>
+        </div>
+    </div>
+
+    <!-- ===== 微信弹窗 ===== -->
+    <div class="modal-overlay" id="wechatModal" onclick="closeWeChatModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="icon-big">💬</div>
+            <h3>添加微信</h3>
+            <p class="hint">请复制微信号，在微信中搜索添加</p>
+            <div class="code-display" id="wechatLink">gfyfyfwfff</div>
+            <button onclick="copyWeChat()" class="copy-btn wechat" id="wechatCopyBtn">复制微信号</button>
+            <button onclick="closeWeChatModal()" class="close-btn">关闭</button>
+        </div>
+    </div>
+
     <!-- ===== 导航栏 ===== -->
     <nav class="navbar" id="navbar">
         <div class="container nav-inner">
-            <div class="nav-logo">Portfolio</div>
+            <div class="nav-logo">阿昕</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#hero">首页</a></li>
                 <li><a href="#about">关于</a></li>
@@ -739,14 +1007,17 @@
     <!-- ===== Hero ===== -->
     <section class="hero" id="hero">
         <div class="container hero-content">
-            <div class="hero-avatar">😊</div>
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span>全栈开发者 · 创意设计师</span>
+            </div>
             <h1>你好，我是 阿昕</h1>
-            <p class="tagline">全栈开发者 · 创意设计师 · 终身学习者</p>
+            <p class="tagline">用技术创造价值，以代码构建美好</p>
             <div class="typed-wrap">
                 <span id="typed-text"></span><span class="cursor">|</span>
             </div>
             <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary">✨ 查看我的作品</a>
+                <a href="#projects" class="btn btn-primary">✨ 查看作品</a>
                 <a href="#contact" class="btn btn-outline">💬 联系我</a>
             </div>
         </div>
@@ -778,30 +1049,12 @@
                 </div>
 
                 <div class="about-info fade-in">
-                    <div class="item">
-                        <div class="label">姓名</div>
-                        <div class="value">阿昕</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">所在地</div>
-                        <div class="value">📍 中国 · 北京</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">职位</div>
-                        <div class="value">全栈开发者</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">经验</div>
-                        <div class="value">X 年</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">邮箱</div>
-                        <div class="value">your@email.com</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">状态</div>
-                        <div class="value">🚀 正在寻找新机会</div>
-                    </div>
+                    <div class="item"><div class="label">姓名</div><div class="value">阿昕</div></div>
+                    <div class="item"><div class="label">职业</div><div class="value">全栈开发者</div></div>
+                    <div class="item"><div class="label">所在地</div><div class="value">中国 · 北京</div></div>
+                    <div class="item"><div class="label">经验</div><div class="value">X 年+</div></div>
+                    <div class="item"><div class="label">邮箱</div><div class="value">hello@axin.dev</div></div>
+                    <div class="item"><div class="label">状态</div><div class="value">🚀 开放合作</div></div>
                 </div>
             </div>
         </div>
@@ -811,47 +1064,35 @@
     <section id="skills">
         <div class="container">
             <h2 class="section-title fade-in">技能栈</h2>
-            <p class="section-subtitle fade-in">我掌握的技术与工具</p>
-
-            <div class="skills-grid">
-                <!-- 技能卡片由 JS 动态渲染 -->
-            </div>
+            <p class="section-subtitle fade-in">我日常使用的主要技术和工具</p>
+            <div class="skills-grid" id="skillsGrid"></div>
         </div>
     </section>
 
     <!-- ===== Timeline ===== -->
-    <section id="timeline" style="background: var(--bg-card);">
+    <section id="timeline">
         <div class="container">
-            <h2 class="section-title fade-in">我的经历</h2>
-            <p class="section-subtitle fade-in">成长路上的重要站点</p>
+            <h2 class="section-title fade-in">经历</h2>
+            <p class="section-subtitle fade-in">我的职业旅程</p>
 
-            <div class="timeline">
-                <div class="timeline-item fade-in">
-                    <div class="date">2025 — 至今</div>
-                    <h3>高级全栈开发者</h3>
-                    <div class="company">某科技公司 · 北京</div>
-                    <p>负责核心产品的架构设计与开发，带领 5 人团队完成多个关键项目交付。</p>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="date">2024 — 至今</div>
+                    <h3>高级前端工程师</h3>
+                    <div class="company">某知名科技公司</div>
+                    <p>负责核心产品的前端架构设计与开发，推动组件化体系建设，提升开发效率 40%。</p>
                 </div>
-
-                <div class="timeline-item fade-in">
-                    <div class="date">2023 — 2025</div>
-                    <h3>前端开发工程师</h3>
-                    <div class="company">某互联网公司 · 上海</div>
-                    <p>使用 React / TypeScript 开发面向用户的 Web 应用，优化首屏加载性能 40%。</p>
+                <div class="timeline-item">
+                    <div class="date">2022 — 2024</div>
+                    <h3>全栈开发工程师</h3>
+                    <div class="company">某创业公司</div>
+                    <p>从零搭建产品技术栈，独立完成前后端开发与部署，支撑产品从 0 到 1 的增长。</p>
                 </div>
-
-                <div class="timeline-item fade-in">
-                    <div class="date">2021 — 2023</div>
-                    <h3>初级开发工程师</h3>
-                    <div class="company">某创业公司 · 北京</div>
-                    <p>从零参与公司主要产品的开发，快速成长并开始独立负责模块。</p>
-                </div>
-
-                <div class="timeline-item fade-in">
-                    <div class="date">2017 — 2021</div>
-                    <h3>计算机科学 本科</h3>
-                    <div class="company">某大学</div>
-                    <p>主修计算机科学与技术，GPA 3.8/4.0，多次获得奖学金。</p>
+                <div class="timeline-item">
+                    <div class="date">2020 — 2022</div>
+                    <h3>初级前端开发</h3>
+                    <div class="company">某互联网公司</div>
+                    <p>参与多个 B 端项目开发，积累了扎实的前端工程化与团队协作经验。</p>
                 </div>
             </div>
         </div>
@@ -860,80 +1101,80 @@
     <!-- ===== Projects ===== -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title fade-in">我的作品</h2>
-            <p class="section-subtitle fade-in">一些让我引以为豪的项目</p>
+            <h2 class="section-title fade-in">精选作品</h2>
+            <p class="section-subtitle fade-in">一些我引以为豪的项目</p>
 
             <div class="projects-grid">
-                <a href="project-weekly-os.html" class="project-card fade-in" style="text-decoration:none;color:inherit;">
-                    <div class="thumb" style="background: linear-gradient(135deg, #1a1a2e, #6c63ff); font-size:3.5rem;">🗓️</div>
-                    <div class="body">
-                        <h3>Weekly OS — Obsidian 预置库</h3>
-                        <p>专为学生党和知识工作者打造的 Obsidian 开箱即用系统：日记、灵感、项目管理、情绪追踪、阅读笔记……一个整合有序的数字大脑。</p>
-                        <div class="project-tags">
-                            <span>Obsidian</span>
-                            <span>个人管理</span>
-                            <span>知识库</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="project-ecommerce.html" class="project-card fade-in" style="text-decoration:none;color:inherit;">
-                    <div class="thumb">🛒</div>
-                    <div class="body">
-                        <h3>电商平台</h3>
-                        <p>一个全功能的电商平台，支持商品管理、购物车、订单追踪和在线支付。</p>
-                        <div class="project-tags">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>MongoDB</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="project-ai.html" class="project-card fade-in" style="text-decoration:none;color:inherit;">
+                <div class="project-card fade-in">
                     <div class="thumb">🤖</div>
                     <div class="body">
-                        <h3>AI 助手应用</h3>
-                        <p>集成大语言模型的智能助手，支持对话、文档分析和代码生成。</p>
+                        <h3>AI 助手</h3>
+                        <p>集成大语言模型的智能对话与内容生成工具，支持上下文记忆、文档分析、代码生成。</p>
                         <div class="project-tags">
                             <span>Python</span>
                             <span>FastAPI</span>
                             <span>LLM</span>
                         </div>
+                        <a href="project-ai.html" class="project-link">查看详情 →</a>
                     </div>
-                </a>
+                </div>
 
-                <a href="project-dashboard.html" class="project-card fade-in" style="text-decoration:none;color:inherit;">
+                <div class="project-card fade-in">
                     <div class="thumb">📊</div>
                     <div class="body">
                         <h3>数据分析仪表盘</h3>
-                        <p>实时数据可视化仪表盘，支持自定义图表、导出报告和数据预警。</p>
+                        <p>实时数据可视化平台，支持 WebSocket 推送、多种图表类型、自定义布局与智能预警。</p>
                         <div class="project-tags">
                             <span>Vue.js</span>
                             <span>D3.js</span>
                             <span>WebSocket</span>
                         </div>
+                        <a href="project-dashboard.html" class="project-link">查看详情 →</a>
                     </div>
-                </a>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="thumb">🛒</div>
+                    <div class="body">
+                        <h3>电商平台</h3>
+                        <p>全功能在线购物系统，支持 JWT 认证、购物车管理、在线支付、后台管理。</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <a href="project-ecommerce.html" class="project-link">查看详情 →</a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="thumb">🗓️</div>
+                    <div class="body">
+                        <h3>Weekly OS</h3>
+                        <p>一个温柔而强大的 Obsidian 预置库 —— 让生活、学习与创作自然生长。含 Dataview / Templater 集成。</p>
+                        <div class="project-tags">
+                            <span>Obsidian</span>
+                            <span>Dataview</span>
+                            <span>¥29.9</span>
+                        </div>
+                        <a href="project-weekly-os.html" class="project-link">查看详情 →</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ===== Contact ===== -->
-    <section id="contact" style="background: var(--bg-card);">
+    <section id="contact">
         <div class="container">
             <h2 class="section-title fade-in">联系我</h2>
-            <p class="section-subtitle fade-in">有任何问题或合作意向？随时联系！</p>
+            <p class="section-subtitle fade-in">想要合作或有任何问题？欢迎联系</p>
 
             <div class="contact-wrap">
                 <div class="contact-info fade-in">
-                    <h3>让我们一起创造</h3>
-                    <p>无论是项目合作、技术交流，还是只是想打个招呼，我都非常欢迎！</p>
+                    <h3>保持连接</h3>
+                    <p>无论你是想找我合作项目、讨论技术，还是只是想打个招呼，我都非常欢迎。</p>
 
-                    <div class="contact-item">
-                        <div class="icon">📧</div>
-                        <div class="text"><a href="mailto:your@email.com">your@email.com</a></div>
-                    </div>
                     <div class="contact-item">
                         <div class="icon">📍</div>
                         <div class="text">中国 · 北京</div>
@@ -950,9 +1191,9 @@
                     <div class="social-links">
                         <a href="#" title="小红书" onclick="openXHS(); return false;" style="font-size:1.5rem;">📕</a>
                         <a href="#" title="微信" onclick="openWeChat(); return false;" style="font-size:1.5rem;">💬</a>
-                        <a href="#" title="GitHub" target="_blank">🐙</a>
-                        <a href="#" title="微博" target="_blank">📱</a>
-                        <a href="#" title="B站" target="_blank">📺</a>
+                        <a href="#" title="GitHub" target="_blank" style="font-size:1.5rem;">🐙</a>
+                        <a href="#" title="微博" target="_blank" style="font-size:1.5rem;">📱</a>
+                        <a href="#" title="B站" target="_blank" style="font-size:1.5rem;">📺</a>
                     </div>
                 </div>
 
@@ -967,69 +1208,10 @@
         </div>
     </section>
 
-    <!-- ===== 小红书弹窗 ===== -->
-    <div id="xhsModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;" onclick="closeXHSModal()">
-        <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:20px;padding:36px 32px;max-width:340px;width:90%;text-align:center;" onclick="event.stopPropagation()">
-            <div style="font-size:3rem;margin-bottom:12px;">📕</div>
-            <h3 style="font-size:1.2rem;margin-bottom:8px;">关注小红书</h3>
-            <p style="color:#a0a0b8;font-size:0.95rem;margin-bottom:8px;">请复制小红书号，打开 App 搜索关注</p>
-            <div id="xhsLink" style="background:#0f0f1a;border:1px solid #2a2a4a;border-radius:12px;padding:14px;font-size:1.3rem;color:#eaeaea;font-weight:700;letter-spacing:2px;margin-bottom:20px;text-align:center;user-select:all;">462105441</div>
-            <button onclick="copyXHS()" id="xhsCopyBtn" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#ff2442,#ff6b81);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">复制小红书号</button>
-            <button onclick="closeXHSModal()" style="width:100%;padding:10px;border-radius:12px;border:none;background:transparent;color:#a0a0b8;font-size:0.9rem;cursor:pointer;margin-top:8px;">关闭</button>
-        </div>
-    </div>
-
-    <!-- ===== 微信弹窗 ===== -->
-    <div id="wechatModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;" onclick="closeWeChatModal()">
-        <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:20px;padding:36px 32px;max-width:340px;width:90%;text-align:center;" onclick="event.stopPropagation()">
-            <div style="font-size:3rem;margin-bottom:12px;">💬</div>
-            <h3 style="font-size:1.2rem;margin-bottom:8px;">添加微信</h3>
-            <p style="color:#a0a0b8;font-size:0.95rem;margin-bottom:8px;">请复制微信号，在微信中搜索添加</p>
-            <div id="wechatLink" style="background:#0f0f1a;border:1px solid #2a2a4a;border-radius:12px;padding:14px;font-size:1.3rem;color:#eaeaea;font-weight:700;letter-spacing:2px;margin-bottom:20px;text-align:center;user-select:all;">gfyfyfwfff</div>
-            <button onclick="copyWeChat()" id="wechatCopyBtn" style="width:100%;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#07c160,#39d67e);color:#fff;font-size:1rem;font-weight:600;cursor:pointer;">复制微信号</button>
-            <button onclick="closeWeChatModal()" style="width:100%;padding:10px;border-radius:12px;border:none;background:transparent;color:#a0a0b8;font-size:0.9rem;cursor:pointer;margin-top:8px;">关闭</button>
-        </div>
-    </div>
-
-    <script>
-        function openXHS() {
-            document.getElementById('xhsModal').style.display = 'flex';
-        }
-        function closeXHSModal() {
-            document.getElementById('xhsModal').style.display = 'none';
-        }
-        function copyXHS() {
-            var text = document.getElementById('xhsLink').textContent;
-            navigator.clipboard.writeText(text).then(function() {
-                var btn = document.getElementById('xhsCopyBtn');
-                btn.textContent = '✅ 已复制！';
-                setTimeout(function() { btn.textContent = '复制小红书号'; }, 2000);
-            }).catch(function() {
-                alert('复制失败，请手动选择复制');
-            });
-        }
-        function openWeChat() {
-            document.getElementById('wechatModal').style.display = 'flex';
-        }
-        function closeWeChatModal() {
-            document.getElementById('wechatModal').style.display = 'none';
-        }
-        function copyWeChat() {
-            var text = document.getElementById('wechatLink').textContent;
-            navigator.clipboard.writeText(text).then(function() {
-                var btn = document.getElementById('wechatCopyBtn');
-                btn.textContent = '✅ 已复制！';
-                setTimeout(function() { btn.textContent = '复制微信号'; }, 2000);
-            }).catch(function() {
-                alert('复制失败，请手动选择复制');
-            });
-        }
-    </script>
-
     <!-- ===== Footer ===== -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 阿昕. Made with ❤️</p>
+            <p>&copy; 2026 阿昕. Made with ❤️ · 月之暗面风格</p>
         </div>
     </footer>
 
@@ -1049,16 +1231,14 @@
             window.addEventListener('resize', resize);
 
             class Particle {
-                constructor() {
-                    this.reset();
-                }
+                constructor() { this.reset(); }
                 reset() {
                     this.x = Math.random() * w;
                     this.y = Math.random() * h;
                     this.size = Math.random() * 2 + 0.5;
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.speedY = (Math.random() - 0.5) * 0.5;
-                    this.opacity = Math.random() * 0.5 + 0.2;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.4 + 0.1;
                 }
                 update() {
                     this.x += this.speedX;
@@ -1068,12 +1248,12 @@
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(108, 99, 255, ${this.opacity})`;
+                    ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
                     ctx.fill();
                 }
             }
 
-            for (let i = 0; i < 80; i++) particles.push(new Particle());
+            for (let i = 0; i < 60; i++) particles.push(new Particle());
 
             function connect() {
                 for (let i = 0; i < particles.length; i++) {
@@ -1085,8 +1265,8 @@
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(108, 99, 255, ${0.1 * (1 - dist / 120)})`;
-                            ctx.lineWidth = 0.8;
+                            ctx.strokeStyle = `rgba(168, 85, 247, ${0.06 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.6;
                             ctx.stroke();
                         }
                     }
@@ -1095,10 +1275,7 @@
 
             function animate() {
                 ctx.clearRect(0, 0, w, h);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
+                particles.forEach(p => { p.update(); p.draw(); });
                 connect();
                 requestAnimationFrame(animate);
             }
@@ -1114,10 +1291,7 @@
                 '终身学习，持续成长 🌱',
                 '构建更好的数字世界 ✨'
             ];
-            let idx = 0,
-                charIdx = 0,
-                isDeleting = false,
-                speed = 80;
+            let idx = 0, charIdx = 0, isDeleting = false, speed = 80;
 
             function type() {
                 const current = phrases[idx];
@@ -1163,7 +1337,7 @@
             });
         });
 
-        // ===== 滚动渐入动画 (IntersectionObserver) =====
+        // ===== 滚动渐入动画 =====
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1171,7 +1345,6 @@
                 }
             });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
         // ===== 技能条动画 =====
@@ -1184,7 +1357,7 @@
             { icon: '🎨', name: 'UI/UX 设计', desc: 'Figma 原型与设计系统', level: 70 },
         ];
 
-        const skillsGrid = document.querySelector('.skills-grid');
+        const skillsGrid = document.getElementById('skillsGrid');
         skillsData.forEach(s => {
             const card = document.createElement('div');
             card.className = 'skill-card fade-in';
@@ -1203,7 +1376,6 @@
             skillsGrid.appendChild(card);
         });
 
-        // 技能条滚动进入视图时动画
         const skillObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1216,8 +1388,41 @@
                 }
             });
         }, { threshold: 0.3 });
-
         document.querySelectorAll('.skill-card').forEach(card => skillObserver.observe(card));
+
+        // ===== 弹窗函数 =====
+        function openXHS() {
+            document.getElementById('xhsModal').style.display = 'flex';
+        }
+        function closeXHSModal() {
+            document.getElementById('xhsModal').style.display = 'none';
+        }
+        function copyXHS() {
+            var text = document.getElementById('xhsLink').textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                var btn = document.getElementById('xhsCopyBtn');
+                btn.textContent = '✅ 已复制！';
+                setTimeout(function() { btn.textContent = '复制小红书号'; }, 2000);
+            }).catch(function() {
+                alert('复制失败，请手动选择复制');
+            });
+        }
+        function openWeChat() {
+            document.getElementById('wechatModal').style.display = 'flex';
+        }
+        function closeWeChatModal() {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
+        function copyWeChat() {
+            var text = document.getElementById('wechatLink').textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                var btn = document.getElementById('wechatCopyBtn');
+                btn.textContent = '✅ 已复制！';
+                setTimeout(function() { btn.textContent = '复制微信号'; }, 2000);
+            }).catch(function() {
+                alert('复制失败，请手动选择复制');
+            });
+        }
 
         // ===== 联系表单提交 =====
         const form = document.getElementById('contactForm');

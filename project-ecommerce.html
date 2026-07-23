@@ -7,132 +7,56 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #6c63ff;
-            --secondary: #f50057;
-            --bg: #0f0f1a;
-            --bg-card: #1a1a2e;
-            --text: #eaeaea;
-            --text-muted: #a0a0b8;
-            --border: #2a2a4a;
+            --primary: #a855f7;
+            --primary-light: #c084fc;
+            --secondary: #ec4899;
+            --gradient: linear-gradient(135deg, #a855f7, #ec4899);
+            --bg: #000000;
+            --bg-surface: rgba(255,255,255,0.04);
+            --bg-surface-hover: rgba(255,255,255,0.08);
+            --text: #ffffff;
+            --text-secondary: rgba(255,255,255,0.7);
+            --text-muted: rgba(255,255,255,0.45);
+            --border: rgba(255,255,255,0.06);
             --radius: 16px;
+            --transition: 0.4s cubic-bezier(0.22,1,0.36,1);
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
-
-        /* 返回按钮 */
-        .back-bar {
-            padding: 24px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 40px;
+        .glow {
+            position: fixed;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(120px);
+            opacity: 0.2;
         }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        .back-btn:hover { color: var(--primary); }
-
-        /* 头部 */
-        .project-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-        .project-header .icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
-        }
-        .project-header h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .project-header .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* 标签 */
-        .project-tags {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 24px 0 40px;
-        }
-        .project-tags span {
-            background: rgba(108, 99, 255, 0.15);
-            color: var(--primary);
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* 详情内容 */
-        .project-content h2 {
-            font-size: 1.5rem;
-            margin: 36px 0 16px;
-            color: var(--text);
-        }
-        .project-content h2::before {
-            content: '▎';
-            color: var(--primary);
-        }
-        .project-content p {
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            font-size: 1.05rem;
-        }
-        .project-content ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 24px;
-        }
-        .project-content ul li {
-            color: var(--text-muted);
-            padding: 10px 16px;
-            margin-bottom: 8px;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        .project-content ul li::before {
-            content: '✅ ';
-        }
-
-        /* 截图占位 */
-        .screenshot {
-            width: 100%;
-            height: 360px;
-            background: linear-gradient(135deg, var(--bg-card), var(--border));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin: 24px 0;
-            border: 1px solid var(--border);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 60px;
-        }
-
+        .glow-1 { top: -150px; right: -150px; background: #a855f7; }
+        .glow-2 { bottom: -200px; left: -150px; background: #ec4899; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        .back-bar { padding: 28px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color var(--transition); }
+        .back-btn:hover { color: var(--primary-light); }
+        .project-header { text-align: center; margin-bottom: 48px; }
+        .project-header .icon { font-size: 4rem; margin-bottom: 20px; }
+        .project-header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; background: linear-gradient(135deg, #fff 40%, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .project-header .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        .project-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 28px 0 48px; }
+        .project-tags span { background: rgba(168,85,247,0.1); color: var(--primary-light); padding: 6px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 450; border: 1px solid rgba(168,85,247,0.1); }
+        .project-content h2 { font-size: 1.5rem; margin: 40px 0 16px; color: var(--text); font-weight: 600; }
+        .project-content h2::before { content: '▎'; color: var(--primary); }
+        .project-content p { color: var(--text-secondary); margin-bottom: 16px; font-size: 1.05rem; }
+        .project-content ul { list-style: none; padding: 0; margin-bottom: 24px; }
+        .project-content ul li { color: var(--text-secondary); padding: 12px 20px; margin-bottom: 8px; background: var(--bg-surface); border-radius: 12px; border: 1px solid var(--border); backdrop-filter: blur(12px); }
+        .project-content ul li::before { content: '✨ '; }
+        .screenshot { width: 100%; height: 360px; background: linear-gradient(135deg, rgba(168,85,247,0.06), rgba(236,73,153,0.06)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-muted); margin: 28px 0; border: 1px solid var(--border); }
+        footer { text-align: center; padding: 48px 0; border-top: 1px solid var(--border); color: rgba(255,255,255,0.25); font-size: 0.85rem; margin-top: 60px; }
         @media (max-width: 600px) {
             .project-header h1 { font-size: 1.8rem; }
             .project-content h2 { font-size: 1.3rem; }
@@ -141,14 +65,12 @@
     </style>
 </head>
 <body>
-
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
     <div class="container">
-        <!-- 返回栏 -->
         <div class="back-bar">
             <a href="index.html" class="back-btn">← 返回主页</a>
         </div>
-
-        <!-- 头部 -->
         <div class="project-header">
             <div class="icon">🛒</div>
             <h1>电商平台</h1>
@@ -159,18 +81,10 @@
                 <span>MongoDB</span>
             </div>
         </div>
-
-        <!-- 截图占位 -->
         <div class="screenshot">📷 项目截图预览</div>
-
-        <!-- 详情内容 -->
         <div class="project-content">
             <h2>项目简介</h2>
-            <p>
-                这是一个全功能的电商平台，用户可以在上面浏览商品、加入购物车、下单购买。
-                后台管理系统支持商品上架、订单处理、数据统计等功能。
-            </p>
-
+            <p>这是一个全功能的电商平台，用户可以在上面浏览商品、加入购物车、下单购买。后台管理系统支持商品上架、订单处理、数据统计等功能。</p>
             <h2>核心功能</h2>
             <ul>
                 <li>用户注册 / 登录（JWT 认证）</li>
@@ -180,32 +94,21 @@
                 <li>订单追踪与历史记录</li>
                 <li>后台管理系统（商品、订单、用户管理）</li>
             </ul>
-
             <h2>技术亮点</h2>
-            <p>
-                前端使用 React + TypeScript 构建，采用组件化开发模式。
-                后端基于 Node.js + Express，使用 MongoDB 存储数据。
-                通过 Redis 缓存热点数据，首屏加载性能提升 40%。
-            </p>
-
+            <p>前端使用 React + TypeScript 构建，采用组件化开发模式。后端基于 Node.js + Express，使用 MongoDB 存储数据。通过 Redis 缓存热点数据，首屏加载性能提升 40%。</p>
             <h2>项目截图</h2>
             <div class="screenshot">🛍️ 商品列表页截图</div>
             <div class="screenshot">🛒 购物车页面截图</div>
-
             <h2>访问链接</h2>
-            <p>
-                🌐 <a href="#" style="color: var(--primary);">https://example.com/ecommerce</a><br/>
-                📂 <a href="#" style="color: var(--primary);">GitHub 仓库地址</a>
-            </p>
+            <p>🌐 <a href="#" style="color: var(--primary-light);">https://example.com/ecommerce</a><br/>
+            📂 <a href="#" style="color: var(--primary-light);">GitHub 仓库地址</a></p>
         </div>
     </div>
-
     <footer>
         <div class="container">
-            <p>&copy; 2026 阿昕. Made with ❤️</p>
-            <p style="margin-top: 8px;"><a href="index.html" style="color: var(--primary);">← 返回主页</a></p>
+            <p>&copy; 2026 阿昕 · Made with ❤️</p>
+            <p style="margin-top: 8px;"><a href="index.html" style="color: var(--primary-light);">← 返回主页</a></p>
         </div>
     </footer>
-
 </body>
 </html>
