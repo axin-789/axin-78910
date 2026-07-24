@@ -92,6 +92,29 @@
             font-weight: 600;
             margin-bottom: 16px;
             box-shadow: 0 4px 24px rgba(168,85,247,0.3);
+            animation: price-glow 2.5s ease-in-out infinite;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+        }
+        .product-hero .price-tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 40px rgba(168,85,247,0.5);
+        }
+        .social-proof {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .social-proof .sp-count {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: var(--crystal-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* CTA 按钮组 */
@@ -178,10 +201,29 @@
 
         /* CTA 大区域 */
         .cta-section {
+            position: relative;
+            overflow: hidden;
             background: var(--bg-surface); border: 1px solid var(--border);
             border-radius: var(--radius-lg); padding: 56px 40px;
             text-align: center; margin: 48px 0;
             backdrop-filter: blur(12px);
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(168,85,247,0.03) 60deg,
+                rgba(79,195,255,0.03) 120deg,
+                rgba(251,191,36,0.03) 180deg,
+                rgba(236,73,153,0.03) 240deg,
+                transparent 300deg
+            );
+            animation: cta-rotate 10s linear infinite;
+            pointer-events: none;
         }
         .cta-section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 12px; }
         .cta-section p { color: var(--text-muted); margin-bottom: 24px; }
@@ -194,12 +236,22 @@
             width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
             z-index: 9999; align-items: center; justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay[style*="flex"] {
+            opacity: 1;
         }
         .modal-box {
             background: #0a0a0f; border: 1px solid var(--border);
             border-radius: var(--radius-lg); padding: 40px 36px;
             max-width: 340px; width: 90%; text-align: center;
             box-shadow: 0 0 60px rgba(168,85,247,0.1);
+            transform: scale(0.85) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay[style*="flex"] .modal-box {
+            transform: scale(1) translateY(0);
         }
         .modal-box .icon-big { font-size: 3rem; margin-bottom: 12px; }
         .modal-box h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
@@ -222,6 +274,15 @@
             font-size: 0.9rem; cursor: pointer; margin-top: 4px;
         }
         .modal-box .close-btn:hover { color: var(--text); }
+
+        @keyframes price-glow {
+            0%, 100% { box-shadow: 0 4px 24px rgba(168,85,247,0.3); }
+            50% { box-shadow: 0 4px 40px rgba(168,85,247,0.5), 0 0 60px rgba(168,85,247,0.2); }
+        }
+        @keyframes cta-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
         @media (max-width: 600px) {
             .product-hero h1 { font-size: 1.8rem; }
@@ -269,6 +330,10 @@
             <h1>Weekly OS</h1>
             <p class="subtitle">一个温柔而强大的 Obsidian 预置库 —— 让你的生活、学习与创作，在一个有序又自由的空间里自然生长。</p>
             <div class="price-tag">💰 售价：¥29.9</div>
+            <div class="social-proof">
+              <span class="sp-count" id="buyerCount">128</span>
+              <span class="sp-label">人已拥有 · 好评率 97%</span>
+            </div>
             <div class="cta-group">
                 <a href="#" class="btn btn-red" onclick="openXHS(); return false;">📕 关注小红书</a>
                 <a href="#" class="btn btn-green" onclick="openWeChat(); return false;">💬 添加微信</a>
@@ -335,8 +400,16 @@
     </div>
 
     <script>
-        function openXHS() { document.getElementById('xhsModal').style.display = 'flex'; }
-        function closeXHSModal() { document.getElementById('xhsModal').style.display = 'none'; }
+        function openXHS() {
+          const modal = document.getElementById('xhsModal');
+          modal.style.display = 'flex';
+          requestAnimationFrame(() => { modal.style.opacity = '1'; });
+        }
+        function closeXHSModal() {
+          const modal = document.getElementById('xhsModal');
+          modal.style.opacity = '0';
+          setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
         function copyXHS() {
             var text = document.getElementById('xhsLink').textContent;
             navigator.clipboard.writeText(text).then(function() {
@@ -345,8 +418,39 @@
                 setTimeout(function() { btn.textContent = '复制小红书号'; }, 2000);
             }).catch(function() { alert('复制失败'); });
         }
-        function openWeChat() { document.getElementById('wechatModal').style.display = 'flex'; }
-        function closeWeChatModal() { document.getElementById('wechatModal').style.display = 'none'; }
+        function openWeChat() {
+          const modal = document.getElementById('wechatModal');
+          modal.style.display = 'flex';
+          requestAnimationFrame(() => { modal.style.opacity = '1'; });
+        }
+        function closeWeChatModal() {
+          const modal = document.getElementById('wechatModal');
+          modal.style.opacity = '0';
+          setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
+        // ===== Social Proof 数字跳动 =====
+        function animateCounter(el, target) {
+          let current = 0;
+          const step = Math.ceil(target / 40);
+          const interval = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(interval);
+            }
+            el.textContent = current;
+          }, 30);
+        }
+        const countObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+              entry.target.dataset.animated = 'true';
+              animateCounter(entry.target, 128);
+            }
+          });
+        }, { threshold: 0.5 });
+        const countEl = document.getElementById('buyerCount');
+        if (countEl) countObserver.observe(countEl);
         function copyWeChat() {
             var text = document.getElementById('wechatLink').textContent;
             navigator.clipboard.writeText(text).then(function() {
