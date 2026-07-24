@@ -9,22 +9,49 @@
         :root {
             --primary: #a855f7;
             --primary-light: #c084fc;
+            --primary-dark: #7c3aed;
             --secondary: #ec4899;
-            --gradient: linear-gradient(135deg, #a855f7, #ec4899);
-            --bg: #000000;
+            --accent-gradient: linear-gradient(135deg, #a855f7, #ec4899);
+            --crystal: #8a6bff;
+            --crystal-light: #4fc3ff;
+            --crystal-gradient: linear-gradient(135deg, #8a6bff, #4fc3ff);
+            --gold: #fbbf24;
+            --gold-gradient: linear-gradient(135deg, #fbbf24, #f59e0b);
+            --bg: #05060a;
             --bg-surface: rgba(255,255,255,0.04);
             --bg-surface-hover: rgba(255,255,255,0.08);
+            --bg-glass: rgba(255,255,255,0.03);
             --text: #ffffff;
             --text-secondary: rgba(255,255,255,0.7);
             --text-muted: rgba(255,255,255,0.45);
             --text-dim: rgba(255,255,255,0.25);
             --border: rgba(255,255,255,0.06);
             --border-hover: rgba(255,255,255,0.12);
+            --radius-sm: 8px;
             --radius: 16px;
             --radius-lg: 24px;
-            --shadow: 0 0 60px rgba(168,85,247,0.12);
+            --radius-xl: 32px;
+            --shadow-glow: 0 0 60px rgba(168, 85, 247, 0.15);
             --transition: 0.4s cubic-bezier(0.22,1,0.36,1);
         }
+
+        /* 玻璃卡片复用类 */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid var(--border);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 40px rgba(168,85,247,0.06);
+        }
+
+        /* 金色强调类 */
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             background: var(--bg);
@@ -57,7 +84,7 @@
         .product-hero .subtitle { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
         .product-hero .price-tag {
             display: inline-block;
-            background: var(--gradient);
+            background: var(--accent-gradient);
             color: #fff;
             padding: 12px 40px;
             border-radius: 100px;
@@ -102,8 +129,9 @@
             background: var(--bg-surface); border: 1px solid var(--border);
             border-radius: var(--radius-lg); padding: 28px 24px;
             transition: var(--transition); backdrop-filter: blur(12px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 40px rgba(168,85,247,0.06);
         }
-        .feature-card:hover { background: var(--bg-surface-hover); border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .feature-card:hover { background: var(--bg-surface-hover); border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
         .feature-card .icon { font-size: 2rem; margin-bottom: 12px; }
         .feature-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
         .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
@@ -115,6 +143,7 @@
             border-radius: 12px; padding: 16px 20px;
             display: flex; align-items: center; gap: 12px;
             transition: var(--transition);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 40px rgba(168,85,247,0.06);
         }
         .module-item:hover { border-color: var(--primary); background: var(--bg-surface-hover); }
         .module-item .icon { font-size: 1.5rem; }
@@ -129,7 +158,7 @@
         .section-title::after {
             content: ''; display: block;
             width: 50px; height: 3px;
-            background: var(--gradient); border-radius: 2px;
+            background: var(--accent-gradient); border-radius: 2px;
             margin-top: 8px;
         }
         .section-content p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 16px; line-height: 1.8; }
@@ -140,6 +169,7 @@
             background: var(--bg-surface); border: 1px solid var(--border);
             border-radius: var(--radius); padding: 24px 20px;
             text-align: center; transition: var(--transition);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 40px rgba(168,85,247,0.06);
         }
         .audience-item:hover { border-color: var(--border-hover); transform: translateY(-2px); }
         .audience-item .icon { font-size: 2.2rem; margin-bottom: 8px; }
