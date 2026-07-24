@@ -1031,6 +1031,13 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .project-card, .feature-card {
+                transform: none !important;
+            }
+            .project-card::after, .feature-card::after {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1054,6 +1061,9 @@
             .about-info .item {
                 padding: 16px;
             }
+
+            #particles-canvas { display: none; }
+            .glow-orbe { opacity: 0.15; }
         }
     </style>
 </head>

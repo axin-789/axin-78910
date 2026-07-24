@@ -284,11 +284,25 @@
             to { transform: rotate(360deg); }
         }
 
+        @media (max-width: 768px) {
+            .feature-card {
+                transform: none !important;
+            }
+            .feature-card::after {
+                display: none;
+            }
+        }
+
         @media (max-width: 600px) {
             .product-hero h1 { font-size: 1.8rem; }
             .section-title { font-size: 1.4rem; }
             .cta-section { padding: 32px 24px; }
             .tagline-box { padding: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .glow { opacity: 0.15; }
+            .social-proof { flex-direction: column; gap: 4px; }
         }
     </style>
 </head>
