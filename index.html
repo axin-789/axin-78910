@@ -770,6 +770,7 @@
         }
         .contact-form input,
         .contact-form textarea {
+            position: relative;
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -778,13 +779,34 @@
             font-size: 0.95rem;
             font-family: inherit;
             outline: none;
-            transition: var(--transition);
+            transition: border-color 0.4s, box-shadow 0.4s, background 0.4s;
         }
         .contact-form input:focus,
         .contact-form textarea:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+            box-shadow:
+                0 0 0 3px rgba(168, 85, 247, 0.12),
+                0 0 20px rgba(168, 85, 247, 0.08);
             background: var(--bg-surface-hover);
+        }
+
+        /* 聚焦时底部渐变线 */
+        .contact-form .input-wrap {
+            position: relative;
+        }
+        .contact-form .input-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--crystal-gradient);
+            border-radius: 1px;
+            transition: width 0.4s ease;
+        }
+        .contact-form .input-wrap:focus-within::after {
+            width: 100%;
         }
         .contact-form input::placeholder,
         .contact-form textarea::placeholder {
@@ -1286,10 +1308,10 @@
                 </div>
 
                 <form class="contact-form fade-in" id="contactForm">
-                    <input type="text" placeholder="你的名字" required />
-                    <input type="email" placeholder="你的邮箱" required />
-                    <input type="text" placeholder="主题" />
-                    <textarea placeholder="想说什么？" required></textarea>
+                    <div class="input-wrap"><input type="text" placeholder="你的名字" required /></div>
+                    <div class="input-wrap"><input type="email" placeholder="你的邮箱" required /></div>
+                    <div class="input-wrap"><input type="text" placeholder="主题" /></div>
+                    <div class="input-wrap"><textarea placeholder="想说什么？" required></textarea></div>
                     <button type="submit" class="btn btn-primary">✉️ 发送消息</button>
                 </form>
             </div>
@@ -1667,6 +1689,31 @@
             });
         }
 
+        // ===== Confetti =====
+        function createConfetti() {
+            const colors = ['#a855f7', '#ec4899', '#fbbf24', '#4fc3ff', '#8a6bff'];
+            for (let i = 0; i < 30; i++) {
+                const el = document.createElement('div');
+                el.style.cssText = `
+                    position: fixed; z-index: 10000; pointer-events: none;
+                    width: ${Math.random() * 8 + 4}px; height: ${Math.random() * 8 + 4}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+                    left: ${Math.random() * 100}vw;
+                    top: -10px;
+                    opacity: 1;
+                    transition: all ${Math.random() * 2 + 1}s cubic-bezier(0.22, 1, 0.36, 1);
+                `;
+                document.body.appendChild(el);
+                requestAnimationFrame(() => {
+                    el.style.transform = `translateY(${window.innerHeight + 50}px) rotate(${Math.random() * 720}deg)`;
+                    el.style.left = (parseFloat(el.style.left) + (Math.random() - 0.5) * 20) + 'vw';
+                    el.style.opacity = '0';
+                });
+                setTimeout(() => el.remove(), 4000);
+            }
+        }
+
         // ===== 联系表单提交 =====
         const form = document.getElementById('contactForm');
         const toast = document.getElementById('toast');
@@ -1679,8 +1726,22 @@
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            showToast('✅ 感谢你的留言！我会尽快回复。');
-            form.reset();
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 发送中...';
+
+            setTimeout(() => {
+                btn.innerHTML = '✅ 已发送！';
+                showToast('🎉 感谢你的留言！我会尽快回复。');
+                form.reset();
+                createConfetti();
+
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }, 1200);
         });
 
         // ===== 磁性按钮 =====
