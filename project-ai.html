@@ -72,8 +72,8 @@
         .glow-2 { bottom: -200px; left: -150px; background: #ec4899; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
         .back-bar { padding: 28px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color var(--transition); }
-        .back-btn:hover { color: var(--primary-light); }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color var(--transition), gap 0.3s; }
+        .back-btn:hover { color: var(--primary-light); gap: 12px; }
         .project-header { text-align: center; margin-bottom: 48px; }
         .project-header .icon { font-size: 4rem; margin-bottom: 20px; }
         .project-header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; background: linear-gradient(135deg, #fff 40%, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -122,14 +122,6 @@
             100% { left: 100%; }
         }
 
-        /* ===== 返回按钮悬停 ===== */
-        .back-btn {
-            transition: color 0.4s, gap 0.3s;
-        }
-        .back-btn:hover {
-            gap: 12px;
-        }
-
         @media (max-width: 600px) {
             .project-header h1 { font-size: 1.8rem; }
             .project-content h2 { font-size: 1.3rem; }
@@ -143,7 +135,7 @@
     <div class="glow glow-2"></div>
     <div class="container">
         <div class="back-bar">
-            <a href="index.html" class="back-btn" style="display:inline-flex;align-items:center;gap:8px;">← 返回主页</a>
+            <a href="index.html" class="back-btn"><span aria-hidden="true">←</span> 返回主页</a>
         </div>
         <div class="project-header">
             <div class="icon">🤖</div>
