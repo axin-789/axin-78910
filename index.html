@@ -1032,10 +1032,10 @@
                 font-size: 2rem;
             }
 
-            .project-card, .feature-card {
+            .project-card {
                 transform: none !important;
             }
-            .project-card::after, .feature-card::after {
+            .project-card::after {
                 display: none;
             }
         }
@@ -1336,6 +1336,9 @@
     </footer>
 
     <script>
+        // Crystal parallax mouse coords — shared between hero light and crystal update
+        let mouseX = null, mouseY = null;
+
         // ===== 粒子动画 =====
         (function initParticles() {
             const canvas = document.getElementById('particles-canvas');
@@ -1395,8 +1398,8 @@
                 }
                 update(time, mouseX, mouseY) {
                     this.rotation += this.rotSpeed;
-                    this.y += Math.sin(time * this.floatSpeed + this.floatOffset) * 0.3;
-                    this.x += Math.cos(time * this.floatSpeed * 0.7 + this.floatOffset) * 0.2;
+                    this.y += Math.sin(time * this.floatSpeed + this.floatOffset) * this.floatAmp * 0.015;
+                    this.x += Math.cos(time * this.floatSpeed * 0.7 + this.floatOffset) * this.floatAmp * 0.01;
                     if (mouseX) {
                         const dx = (mouseX / this.w - 0.5) * this.z * 0.05;
                         this.x += dx;
@@ -1446,13 +1449,7 @@
             const crystals = [];
             for (let i = 0; i < 8; i++) crystals.push(new Crystal(w, h));
 
-            let mouseX = null, mouseY = null;
-            canvas.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            canvas.addEventListener('mouseleave', () => { mouseX = null; mouseY = null; });
-
+            // mouse tracking moved to hero handler below (consolidated with hero light)
             let time = 0;
 
             function connect() {
@@ -1495,7 +1492,15 @@
             const y = ((e.clientY - rect.top) / rect.height) * 100;
             heroSection.style.setProperty('--mouse-x', x + '%');
             heroSection.style.setProperty('--mouse-y', y + '%');
+            // Crystal parallax — use canvas-relative coords
+            const pCanvas = document.getElementById('particles-canvas');
+            if (pCanvas) {
+                const cr = pCanvas.getBoundingClientRect();
+                mouseX = e.clientX - cr.left;
+                mouseY = e.clientY - cr.top;
+            }
         });
+        heroSection.addEventListener('mouseleave', () => { mouseX = null; mouseY = null; });
 
         // ===== Typed 打字效果 =====
         (function initTyped() {
@@ -1815,6 +1820,7 @@
                 child.style.transitionDelay = (i * 0.08) + 's';
                 child.classList.add('visible');
               });
+              staggerObserver.unobserve(entry.target);
             }
           });
         }, { threshold: 0.1 });

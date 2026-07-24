@@ -74,8 +74,8 @@
 
         /* 返回 */
         .back-bar { padding: 28px 0; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color var(--transition); }
-        .back-btn:hover { color: var(--primary-light); }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color var(--transition), gap 0.3s; }
+        .back-btn:hover { color: var(--primary-light); gap: 12px; }
 
         /* 头部 */
         .product-hero { text-align: center; padding: 40px 0 48px; }
@@ -336,7 +336,7 @@
 
     <div class="container">
         <div class="back-bar">
-            <a href="index.html" class="back-btn">← 返回主页</a>
+            <a href="index.html" class="back-btn"><span aria-hidden="true">←</span> 返回主页</a>
         </div>
 
         <div class="product-hero">
