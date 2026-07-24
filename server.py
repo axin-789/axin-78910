@@ -14,6 +14,11 @@ import socketserver
 import webbrowser
 import socket
 import threading
+import sys
+
+# 解决 Windows 控制台编码问题
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 PORT = 8000
 DIRECTORY = "."
@@ -24,7 +29,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
     def log_message(self, format, *args):
-        print(f"  ➜  {args[0]} {args[1]} {args[2]}")
+        if len(args) == 2:
+            print(f"  ❌  {args[0]} {args[1]}")
+        elif len(args) >= 3:
+            print(f"  ➜  {args[0]} {args[1]} {args[2]}")
+        else:
+            print(f"  ➜  {args}")
 
 
 def get_local_ip():
