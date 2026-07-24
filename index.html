@@ -167,7 +167,7 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 20px 0;
+            padding: 20px 0 0;
             transition: background var(--transition), backdrop-filter var(--transition);
         }
         .navbar.scrolled {
@@ -175,6 +175,17 @@
             backdrop-filter: blur(20px) saturate(1.5);
             -webkit-backdrop-filter: blur(20px) saturate(1.5);
             border-bottom: 1px solid var(--border);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 1.5px;
+            background: var(--accent-gradient);
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 0 1px 1px 0;
         }
 
         .nav-inner {
@@ -1027,6 +1038,7 @@
                 <span></span><span></span><span></span>
             </button>
         </div>
+        <div class="progress-bar" id="progressBar"></div>
     </nav>
 
     <!-- ===== Hero ===== -->
@@ -1347,6 +1359,29 @@
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 60);
         });
+
+        // ===== 滚动进度条 =====
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = scrollPercent + '%';
+        });
+
+        // ===== 当前 Section 导航高亮 =====
+        const sections = document.querySelectorAll('section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navAnchors.forEach(a => {
+                        a.style.color = a.getAttribute('href') === '#' + entry.target.id ? 'var(--text)' : '';
+                    });
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+        sections.forEach(s => sectionObserver.observe(s));
 
         // ===== 移动端汉堡菜单 =====
         const hamburger = document.getElementById('hamburger');
